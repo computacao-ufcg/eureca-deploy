@@ -1,11 +1,12 @@
 'use strict';
 
+const path = require('path');
+const { readFile, buildNacionalidades } = require('../../util/readSync');
+var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'nacionalidade.csv');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Nacionalidade', [
-      { nacionalidade: 'Brasileira' },
-      { nacionalidade: 'Brasileira - Naturalizado ou nascido no exterior' },
-    ], {});
+    return queryInterface.bulkInsert('Nacionalidade', buildNacionalidades(readFile(filePath)), {});
   },
 
   down: (queryInterface, Sequelize) => {

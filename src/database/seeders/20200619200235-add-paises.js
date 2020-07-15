@@ -1,10 +1,12 @@
 'use strict';
 
+const path = require('path');
+const { readFile, buildPaisOrigem } = require('../../util/readSync');
+var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'pais.csv');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('PaisOrigem', [
-      { país_origem: 'Brasil' },
-    ], {});
+    return queryInterface.bulkInsert('PaisOrigem', buildPaisOrigem(readFile(filePath)), {});
   },
 
   down: (queryInterface, Sequelize) => {

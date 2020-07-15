@@ -25,17 +25,125 @@ const buildCursos = (cursos) => {
   return dados;
 }
 
+// Função responsável por preparar os dados de cotas para inserção no banco de dados.
+const buildCotas = cotas => {
+  const dados = [];
+  for (let i = 0; i < cotas.length; i++) {
+    dados.push({
+      descricao_cota: cotas[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de deficiências para inserção no banco de dados.
+const buildDeficiencias = deficiencias => {
+  const dados = [];
+  for (let i = 0; i < deficiencias.length; i++) {
+    dados.push({
+      descricao_deficiencia: deficiencias[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de escolas para inserção no banco de dados.
+const buildEscolas = escolas => {
+  const dados = [];
+  for (let i = 0; i < escolas.length; i++) {
+    dados.push({
+      tipo_escola: escolas[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de estados civis para inserção no banco de dados.
+const buildEstadosCivis = estados_civis => {
+  const dados = [];
+  for (let i = 0; i < estados_civis.length; i++) {
+    dados.push({
+      estado_civil: estados_civis[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de gêneros para inserção no banco de dados.
+const buildGeneros = generos => {
+  const dados = [];
+  for (let i = 0; i < generos.length; i++) {
+    dados.push({
+      genero: generos[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de ingresso para inserção no banco de dados.
+const buildIngressos = ingressos => {
+  const dados = [];
+  for (let i = 0; i < ingressos.length; i++) {
+    dados.push({
+      descricao_ingresso: ingressos[i]
+    });
+  }
+  return dados;
+}
+
 // Função responsável por preparar os dados de munícipios para inserção no banco de dados.
 const buildMunicipios = (municipios) => {
   const dados = [];
   for (let i = 0; i < municipios.length; i++) {
     const tokens_municipio = municipios[i].split(';');
-    if (tokens_municipio[0].length > 30) {
-      console.log('ERROR');
-    }
     dados.push({
       municipio: tokens_municipio[0],
       estado: tokens_municipio[1],
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de nacionalidades para inserção no banco de dados.
+const buildNacionalidades = nacionalidades => {
+  const dados = [];
+  for (let i = 0; i < nacionalidades.length; i++) {
+    dados.push({
+      nacionalidade: nacionalidades[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de países de origem para inserção no banco de dados.
+const buildPaisOrigem = paises => {
+  const dados = [];
+  for (let i = 0; i < paises.length; i++) {
+    dados.push({
+      país_origem: paises[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de situação do aluno ou situação do
+//vínculo para inserção no banco de dados.
+const buildSituacao = situacao => {
+  const dados = [];
+  for (let i = 0; i < situacao.length; i++) {
+    dados.push({
+      descricao_situacao: situacao[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de raças para inserção no banco de dados.
+const buildRacas = racas => {
+  const dados = [];
+  for (let i = 0; i < racas.length; i++) {
+    dados.push({
+      raça: racas[i]
     });
   }
   return dados;
@@ -76,13 +184,13 @@ const buildAlunoDeficiencias = (aluno_deficiencias) => {
     const tokens_aluno = aluno_deficiencias[i].split(';');
     dados.push({
       cpf_aluno: tokens_aluno[0],
-      codigo_deficiencia: tokens_aluno[1],
+      codigo_deficiencia: Number(tokens_aluno[1]),
     });
   }
   return dados;
 }
 
-// Função responsável por preparar os dados de munícipios para inserção no banco de dados.
+// Função responsável por preparar os dados de vínculos de alunos para inserção no banco de dados.
 const buildAlunoVinculos = (aluno_vinculos) => {
   const dados = [];
   for (let i = 0; i < aluno_vinculos.length; i++) {
@@ -101,7 +209,17 @@ const buildAlunoVinculos = (aluno_vinculos) => {
 module.exports = { 
   readFile,
   buildCursos,
+  buildCotas,
+  buildDeficiencias,
+  buildEscolas,
+  buildEstadosCivis,
+  buildGeneros,
+  buildIngressos,
   buildMunicipios,
+  buildNacionalidades,
+  buildPaisOrigem,
+  buildRacas,
+  buildSituacao,
   buildAlunos,
   buildAlunoDeficiencias,
   buildAlunoVinculos,

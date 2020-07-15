@@ -1,20 +1,12 @@
 'use strict';
 
+const path = require('path');
+const { readFile, buildSituacao } = require('../../util/readSync');
+var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'situacao_vinculo.csv');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('SituacaoVinculo', [
-      { descricao_situacao: 'CANCELADO 3 REPROV MESMA DISCIPLINA' },
-      { descricao_situacao: 'CANCELADO NOVO INGRESSO MESMO CURSO' },
-      { descricao_situacao: 'CANCELADO NOVO INGRESSO OUTRO CURSO' },
-      { descricao_situacao: 'CANCELADO REPROVOU TODAS POR FALTAS' },
-      { descricao_situacao: 'CANCELAMENTO DE MATRICULA' },
-      { descricao_situacao: 'CANCELAMENTO P/ DECISAO JUDICIAL' },
-      { descricao_situacao: 'CANCELAMENTO P/ MUDANCA CURSO' },
-      { descricao_situacao: 'CANCELAMENTO P/ SOLICITACAO ALUNO' },
-      { descricao_situacao: 'CANCELAMENTO POR ABANDONO' },
-      { descricao_situacao: 'GRADUADO' },
-      { descricao_situacao: 'REGULAR' },
-    ], {});
+    return queryInterface.bulkInsert('SituacaoVinculo', buildSituacao(readFile(filePath)), {});
   },
 
   down: (queryInterface, Sequelize) => {
