@@ -48,21 +48,22 @@ const buildAlunos = (alunos) => {
     const tokens_aluno = alunos[i].split(';');
     dados.push({
       cpf: tokens_aluno[0],
-      id_situacao: Number(tokens_aluno[1]),
-      semestre_situacao: tokens_aluno[2],
-      id_ingresso: Number(tokens_aluno[3]),
-      semestre_ingresso: tokens_aluno[4],
-      ano_nascimento: Number(tokens_aluno[5]),
-      id_cota: Number(tokens_aluno[6]),
-      id_tipo_escola: Number(tokens_aluno[7]),
-      ano_conclusao_ensino_medio: Number(tokens_aluno[8]),
-      email: tokens_aluno[9],
-      id_genero: Number(tokens_aluno[10]),
-      id_estado_civil: Number(tokens_aluno[11]),
-      id_nacionalidade: Number(tokens_aluno[12]),
-      id_pais_origem: Number(tokens_aluno[13]),
-      id_naturalidade: Number(tokens_aluno[14]),
-      id_raca: Number(tokens_aluno[15])
+      nome: tokens_aluno[1],
+      id_situacao: Number(tokens_aluno[2]),
+      semestre_situacao: tokens_aluno[3],
+      id_ingresso: Number(tokens_aluno[4]),
+      semestre_ingresso: tokens_aluno[5],
+      ano_nascimento: Number(tokens_aluno[6]),
+      id_cota: Number(tokens_aluno[7]),
+      id_tipo_escola: Number(tokens_aluno[8]),
+      ano_conclusao_ensino_medio: Number(tokens_aluno[9]),
+      email: tokens_aluno[10],
+      id_genero: Number(tokens_aluno[11]),
+      id_estado_civil: Number(tokens_aluno[12]),
+      id_nacionalidade: Number(tokens_aluno[13]),
+      id_pais_origem: Number(tokens_aluno[14]),
+      id_naturalidade: Number(tokens_aluno[15]),
+      id_raca: Number(tokens_aluno[16])
     });
   }
   return dados;
@@ -89,8 +90,8 @@ const buildAlunoVinculos = (aluno_vinculos) => {
     dados.push({
       cpf: tokens_aluno[0],
       matricula_vinculo: tokens_aluno[1],
-      id_curso: tokens_aluno[2],
-      id_situacao_vinculo: tokens_aluno[3],
+      id_curso: Number(tokens_aluno[2]),
+      id_situacao_vinculo: Number(tokens_aluno[3]),
       periodo_evasao: tokens_aluno[4],
     });
   }

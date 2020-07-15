@@ -6,7 +6,7 @@ module.exports = {
       { descricao_situacao: 'CANCELADO 3 REPROV MESMA DISCIPLINA' },
       { descricao_situacao: 'CANCELADO NOVO INGRESSO MESMO CURSO' },
       { descricao_situacao: 'CANCELADO NOVO INGRESSO OUTRO CURSO' },
-      { descricao_situacao: 'CANCELADO REPROVOU TODAS POR FALTA' },
+      { descricao_situacao: 'CANCELADO REPROVOU TODAS POR FALTAS' },
       { descricao_situacao: 'CANCELAMENTO DE MATRICULA' },
       { descricao_situacao: 'CANCELAMENTO P/ DECISAO JUDICIAL' },
       { descricao_situacao: 'CANCELAMENTO P/ MUDANCA CURSO' },

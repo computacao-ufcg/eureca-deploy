@@ -7,6 +7,7 @@ class Aluno extends Model {
         type: DataTypes.STRING(11),
         primaryKey: true,
       },
+      nome: DataTypes.STRING(100),
       id_situacao: DataTypes.INTEGER,
       semestre_situacao: DataTypes.STRING(20),
       id_ingresso: DataTypes.INTEGER,
