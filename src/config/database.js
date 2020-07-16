@@ -1,5 +1,7 @@
 require('dotenv/config')
 
+/* Arquivo responsável pela configuração da conexão com o banco de dados. */
+
 module.exports = {
   dialect: process.env.DB_DIALECT,
   host: process.env.DB_HOST,

@@ -20,6 +20,7 @@ const AlunoDeficienciaController = require('./controller/AlunoDeficienciaControl
 
 const routes = express.Router();
 
+// rotas de cadastro
 routes.post('/alunos', AlunoController.store);
 routes.post('/alunos-vinculos', AlunoVinculoController.store);
 routes.post('/alunos-situacao', SituacaoAlunoController.store);
@@ -34,8 +35,6 @@ routes.post('/municipio', MunicipioController.store);
 routes.post('/raca', RacaController.store);
 routes.post('/curso', CursoController.store);
 routes.post('/situacao-vinculo', SituacaoVinculoController.store);
-
-// cadastro de deficiência
 routes.post('/deficiencias', DeficienciaController.store);
 
 // listar deficiência específica por id
