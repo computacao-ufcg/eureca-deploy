@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { readFile, buildAlunoVinculos } = require('../../util/readSync');
+const { readFile, buildAlunoVinculos } = require('../../database/populateDB');
 var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'aluno_vinculos.csv');
 
 module.exports = {

@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { readFile, buildCotas } = require('../../util/readSync');
+const { readFile, buildCotas } = require('../../database/populateDB');
 var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'cota.csv');
 
 module.exports = {
