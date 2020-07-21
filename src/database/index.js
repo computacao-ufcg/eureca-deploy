@@ -20,6 +20,12 @@ const Curso = require('../models/Curso');
 const SituacaoVinculo = require('../models/SituacaoVinculo');
 const Deficiencia = require('../models/Deficiencia');
 const AlunoDeficiencia = require('../models/AlunoDeficiencia');
+const TipoDisciplina = require('../models/TipoDisciplina');
+const Disciplina = require('../models/Disciplina');
+const SituacaoDisciplina = require('../models/SituacaoDisciplina');
+const Professor = require('../models/Professor');
+const Horario = require('../models/Horario');
+const Turma = require('../models/Turma');
 
 // Intância da conexão com o postgres através do sequelize
 const connection = new Sequelize(dbConfig);
@@ -36,12 +42,19 @@ EstadoCivil.init(connection);
 Nacionalidade.init(connection);
 PaisOrigem.init(connection);
 Municipio.init(connection);
-Raca.init(connection)
+Raca.init(connection);
 Curso.init(connection);
 SituacaoVinculo.init(connection);
 Deficiencia.init(connection);
 AlunoDeficiencia.init(connection);
+TipoDisciplina.init(connection);
+Disciplina.init(connection);
+SituacaoDisciplina.init(connection);
+Professor.init(connection);
+Horario.init(connection);
+Turma.init(connection);
 
+// definição das associações
 AlunoVinculo.associate(connection.models);
 Aluno.associate(connection.models);
 Deficiencia.associate(connection.models);
