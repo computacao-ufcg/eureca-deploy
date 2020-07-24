@@ -3,12 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Curso extends Model {
   static init(connection) {
     super.init({
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      nome_curso: DataTypes.STRING,
+      nome: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false,

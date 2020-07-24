@@ -3,18 +3,18 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Turma', {
-      codigo_turma: {
+      id: { 
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       id_disciplina: {
-        type: Sequelize.STRING(7),
+        type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Disciplina', key: 'codigo_disciplina' },
+        references: { model: 'Disciplina', key: 'id' },
       },
-      numero_turma: {
+      turma: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -22,17 +22,12 @@ module.exports = {
         type: Sequelize.STRING(6),
         allowNull: false,
       },
-      id_professor: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Professor', key: 'codigo_professor' },
-      },
       id_horario: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Horario', key: 'codigo_horario' },
+        references: { model: 'Horario', key: 'id' },
       },
-      sala: {
+      id_sala: {
         type: Sequelize.STRING(30),
         allowNull: false,
       }

@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 
-class PaisOrigem extends Model {
+class Cor extends Model {
   static init(connection) {
     super.init({
-      país_origem: DataTypes.STRING,
+      descricao: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false,
@@ -11,8 +11,8 @@ class PaisOrigem extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Aluno, { foreignKey: 'id_pais_origem', as: 'pais-origem-aluno' });
+    this.hasOne(models.Cor, { foreignKey: 'id_cor', as: 'raca-aluno' });
   }
 }
 
-module.exports = PaisOrigem;
+module.exports = Cor;

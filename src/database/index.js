@@ -4,23 +4,22 @@ const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
 
 // Importação dos models
-const Aluno = require('../models/Aluno');
-const SituacaoAluno = require('../models/SituacaoAluno');
-const AlunoVinculo = require('../models/AlunoVinculo');
+const Discente = require('../models/Discente');
+const SituacaoDiscente = require('../models/SituacaoDiscente');
+const DiscenteVinculo = require('../models/DiscenteVinculo');
 const Ingresso = require('../models/Ingresso');
 const Cota = require('../models/Cota');
 const Escola = require('../models/Escola');
 const Genero = require('../models/Genero');
 const EstadoCivil = require('../models/EstadoCivil');
 const Nacionalidade = require('../models/Nacionalidade');
-const PaisOrigem = require('../models/PaisOrigem');
-const Municipio = require('../models/Municipio');
-const Raca = require('../models/Raca');
+const Pais = require('../models/Pais');
+const Naturalidade = require('../models/Naturalidade');
+const Cor = require('../models/Cor');
 const Curso = require('../models/Curso');
 const SituacaoVinculo = require('../models/SituacaoVinculo');
 const Deficiencia = require('../models/Deficiencia');
-const AlunoDeficiencia = require('../models/AlunoDeficiencia');
-const TipoDisciplina = require('../models/TipoDisciplina');
+const DiscenteDeficiencia = require('../models/DiscenteDeficiencia');
 const Disciplina = require('../models/Disciplina');
 const SituacaoDisciplina = require('../models/SituacaoDisciplina');
 const Professor = require('../models/Professor');
@@ -31,23 +30,22 @@ const Turma = require('../models/Turma');
 const connection = new Sequelize(dbConfig);
 
 // Conexão dos models a conexão do bd
-Aluno.init(connection);
-SituacaoAluno.init(connection);
-AlunoVinculo.init(connection);
+Discente.init(connection);
+SituacaoDiscente.init(connection);
+DiscenteVinculo.init(connection);
 Ingresso.init(connection);
 Cota.init(connection);
 Escola.init(connection);
 Genero.init(connection);
 EstadoCivil.init(connection);
 Nacionalidade.init(connection);
-PaisOrigem.init(connection);
-Municipio.init(connection);
-Raca.init(connection);
+Pais.init(connection);
+Naturalidade.init(connection);
+Cor.init(connection);
 Curso.init(connection);
 SituacaoVinculo.init(connection);
 Deficiencia.init(connection);
-AlunoDeficiencia.init(connection);
-TipoDisciplina.init(connection);
+DiscenteDeficiencia.init(connection);
 Disciplina.init(connection);
 SituacaoDisciplina.init(connection);
 Professor.init(connection);
@@ -55,8 +53,8 @@ Horario.init(connection);
 Turma.init(connection);
 
 // definição das associações
-AlunoVinculo.associate(connection.models);
-Aluno.associate(connection.models);
+DiscenteVinculo.associate(connection.models);
+Discente.associate(connection.models);
 Deficiencia.associate(connection.models);
 
 module.exports = connection;

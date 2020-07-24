@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      genero: {
+      descricao: {
         type: Sequelize.STRING(10),
         allowNull: false,
         unique: true,

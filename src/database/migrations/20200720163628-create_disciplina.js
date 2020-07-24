@@ -3,28 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Disciplina', { 
-      codigo_disciplina: {
-        type: Sequelize.STRING(7),
+      id: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
-      id_tipo_disciplina: {
-        type: Sequelize.INTEGER,
+      codigo: {
+        type: Sequelize.STRING(7),
         allowNull: false,
-        references: { model: 'TipoDisciplina', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       creditos: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      carga_horaria: {
+      horas: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
       nome: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(60),
         allowNull: false,
       },
     });

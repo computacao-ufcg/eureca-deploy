@@ -1,14 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 
-class AlunoDeficiencia extends Model {
+class DiscenteDeficiencia extends Model {
   static init(connection) {
     super.init({
-      cpf_aluno: {
+      cpf: {
         type: DataTypes.STRING(11),
         allowNull: false,
         primaryKey: true,
       },
-      codigo_deficiencia: {
+      id_deficiencia: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -20,4 +20,4 @@ class AlunoDeficiencia extends Model {
   }
 }
 
-module.exports = AlunoDeficiencia;
+module.exports = DiscenteDeficiencia;

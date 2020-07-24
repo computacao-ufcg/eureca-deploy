@@ -3,11 +3,11 @@ const Nacionalidade = require('../models/Nacionalidade');
 module.exports = {
   async store(req, res) {
     const {
-      nacionalidade
+      descricao
     } = req.body;
 
-    const nationality = await Nacionalidade.create({ nacionalidade });
+    const nacionalidade = await Nacionalidade.create({ descricao });
 
-    return res.json(nationality);
+    return res.json(nacionalidade);
   }
 }

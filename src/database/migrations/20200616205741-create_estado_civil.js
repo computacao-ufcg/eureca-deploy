@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      estado_civil: {
+      descricao: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,

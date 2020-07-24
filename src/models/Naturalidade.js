@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Municipio extends Model {
+class Naturalidade extends Model {
   static init(connection) {
     super.init({
       municipio: DataTypes.STRING,
@@ -12,8 +12,8 @@ class Municipio extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Aluno, { foreignKey: 'id_naturalidade', as: 'naturalidade-aluno' });
+    this.hasOne(models.Discente, { foreignKey: 'id_naturalidade', as: 'naturalidade-aluno' });
   }
 }
 
-module.exports = Municipio;
+module.exports = Naturalidade;

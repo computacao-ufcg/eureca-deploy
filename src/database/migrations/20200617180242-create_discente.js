@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Aluno', {
+    return queryInterface.createTable('Discente', {
       cpf: {
         type: Sequelize.STRING(11),
         primaryKey: true,
@@ -15,7 +15,7 @@ module.exports = {
       id_situacao: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'SituacaoAluno', key: 'id' },
+        references: { model: 'SituacaoDiscente', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -84,21 +84,21 @@ module.exports = {
       id_pais_origem: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'PaisOrigem', key: 'id' },
+        references: { model: 'Pais', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       id_naturalidade: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Municipio', key: 'id' },
+        references: { model: 'Naturalidade', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      id_raca: {
+      id_cor: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Raca', key: 'id' },
+        references: { model: 'Cor', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -106,6 +106,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Aluno');
+    return queryInterface.dropTable('Discente');
   }
 };

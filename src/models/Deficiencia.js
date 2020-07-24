@@ -3,12 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Deficiencia extends Model {
   static init(connection) {
     super.init({
-      codigo_deficiencia: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      descricao_deficiencia: DataTypes.STRING,
+      descricao: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false,
@@ -16,7 +11,7 @@ class Deficiencia extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Aluno, { foreignKey: 'codigo_deficiencia', through: 'AlunoDeficiencia', as: 'deficiencia-alunos' });
+    this.belongsToMany(models.DiscenteDeficiencia, { foreignKey: 'codigo_deficiencia', through: 'AlunoDeficiencia', as: 'deficiencia-alunos' });
   }
 }
 

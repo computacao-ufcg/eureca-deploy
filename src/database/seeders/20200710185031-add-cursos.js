@@ -1,12 +1,12 @@
 'use strict';
 
 const path = require('path');
-const { readFile, buildCursos } = require('../../database/populateDB');
+const { readFile, buildNomes } = require('../../database/populateDB');
 var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'cursos.csv');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Curso', buildCursos(readFile(filePath)), {});
+    return queryInterface.bulkInsert('Curso', buildNomes(readFile(filePath)), {});
   },
 
   down: (queryInterface, Sequelize) => {

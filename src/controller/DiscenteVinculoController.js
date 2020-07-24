@@ -1,4 +1,4 @@
-const AlunoVinculo = require('../models/AlunoVinculo');
+const DiscenteVinculo = require('../models/DiscenteVinculo');
 const Curso = require('../models/Curso');
 const SituacaoVinculo = require('../models/SituacaoVinculo');
 
@@ -6,28 +6,29 @@ module.exports = {
   async store(req, res) {
     const {
       cpf,
-      matricula_vinculo,
+      matricula,
       id_curso,
       id_situacao_vinculo,
-      periodo_evasao
+      semestre_vinculo
     } = req.body;
 
-    const aluno_vinculo = await AlunoVinculo.create({
+    const discente_vinculo = await DiscenteVinculo.create({
       cpf,
-      matricula_vinculo,
+      matricula,
       id_curso,
       id_situacao_vinculo,
-      periodo_evasao
+      semestre_vinculo
     });
 
-    return res.json(aluno_vinculo);
+    return res.json(discente_vinculo);
   },
 
   async show(req, res) {
     const { cpf } = req.headers;
     const { 
       id_curso, 
-      id_sit_vinc } = req.params;
+      id_sit_vinc 
+    } = req.params;
     
     const curso = await Curso.findByPk(id_curso);
 
@@ -37,15 +38,15 @@ module.exports = {
       return res.status(400).json({ error: 'course or link situation does not exists' })
     }
 
-    const aluno_vinculo = await AlunoVinculo.findByPk(cpf, {
+    const discente_vinculo = await DiscenteVinculo.findByPk(cpf, {
       include: { association: 'aluno' },
       attributes: ['cpf', 'matricula_vinculo', 'id_curso', 'id_situacao_vinculo', 'periodo_evasao']
     });
 
-    if (!aluno_vinculo) {
+    if (!discente_vinculo) {
       return res.status(400).json({ error: 'student bond does not exists' });
     }
 
-    return res.json(aluno_vinculo);
+    return res.json(discente_vinculo);
   }
 }

@@ -3,10 +3,10 @@ const EstadoCivil = require('../models/EstadoCivil');
 module.exports = {
   async store(req, res) {
     const {
-      estado_civil
+      descricao
     } = req.body;
 
-    const civil_state = await EstadoCivil.create({ estado_civil });
+    const civil_state = await EstadoCivil.create({ descricao });
 
     return res.json(civil_state);
   }

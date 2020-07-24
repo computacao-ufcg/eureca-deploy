@@ -3,10 +3,10 @@ const Escola = require('../models/Escola');
 module.exports = {
   async store(req, res) {
     const {
-      nome_escola
+      descricao
     } = req.body;
 
-    const escola = await Escola.create({ nome_escola });
+    const escola = await Escola.create({ descricao });
 
     return res.json(escola);
   }

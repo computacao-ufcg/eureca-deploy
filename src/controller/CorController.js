@@ -1,12 +1,12 @@
-const Raca = require('../models/Raca');
+const Cor = require('../models/Cor');
 
 module.exports = {
   async store(req, res) {
     const {
-      raça
+      descricao
     } = req.body;
 
-    const breed = await Raca.create({ raça });
+    const breed = await Cor.create({ descricao });
 
     return res.json(breed);
   }

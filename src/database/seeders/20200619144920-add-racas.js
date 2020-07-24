@@ -1,15 +1,15 @@
 'use strict';
 
 const path = require('path');
-const { readFile, buildRacas } = require('../../database/populateDB');
+const { readFile, buildDescricao } = require('../../database/populateDB');
 var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'cor.csv');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Raca', buildRacas(readFile(filePath)), {});
+    return queryInterface.bulkInsert('Cor', buildDescricao(readFile(filePath)), {});
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Raca', null, {});
+      return queryInterface.bulkDelete('Cor', null, {});
   }
 };

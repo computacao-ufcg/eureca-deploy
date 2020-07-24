@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Nacionalidade extends Model {
   static init(connection) {
     super.init({
-      nacionalidade: DataTypes.STRING,
+      descricao: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false,
@@ -11,7 +11,7 @@ class Nacionalidade extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Aluno, { foreignKey: 'id_nacionalidade', as: 'nacionalidade-aluno' });
+    this.hasOne(models.Discente, { foreignKey: 'id_nacionalidade', as: 'nacionalidade-aluno' });
   }
 }
 

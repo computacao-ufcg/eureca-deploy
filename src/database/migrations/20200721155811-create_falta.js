@@ -12,7 +12,7 @@ module.exports = {
       id_turma: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Turma', key: 'codigo_turma' },
+        references: { model: 'Turma', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },

@@ -1,10 +1,11 @@
 const connection = require('../database/index');
-const Aluno = require('../models/Aluno');
+const Discente = require('../models/Discente');
 
 module.exports = {
   async store(req, res) {
     const { 
       cpf,
+      nome,
       id_situacao,
       semestre_situacao,
       id_ingresso,
@@ -19,11 +20,12 @@ module.exports = {
       id_nacionalidade,
       id_pais_origem,
       id_naturalidade,
-      id_raca
+      id_cor
     } = req.body;
 
-    const aluno = await Aluno.create({
+    const discente = await Discente.create({
       cpf,
+      nome,
       id_situacao,
       semestre_situacao,
       id_ingresso,
@@ -38,37 +40,37 @@ module.exports = {
       id_nacionalidade,
       id_pais_origem,
       id_naturalidade,
-      id_raca
+      id_cor
     });
 
-    return res.json(aluno);
+    return res.json(discente);
   },
 
   async show(req, res) {
     const { cpf } = req.params;
 
-    const aluno = await Aluno.findByPk(cpf, {
-      include: { association: 'aluno-deficiencias' },
-      where: { cpf_aluno: cpf }
+    const discente = await Discente.findByPk(cpf, {
+      include: { association: 'aluno' },
+      where: { cpf_Discente: cpf }
     });
 
-    if (!aluno) {
+    if (!discente) {
       return res.status(400).json({ error: 'The student does not exist' });
     }
 
-    return res.json(aluno);
+    return res.json(discente);
   },
 
   async remove(req, res) {
     const { cpf } = req.params;
 
-    const aluno = await Aluno.findByPk(cpf);
+    const discente = await Discente.findByPk(cpf);
 
-    if (!aluno) {
+    if (!discente) {
       return res.status(400).json({ error: 'The student does not exist' });
     }
 
-    return await Aluno.destroy({
+    return await Discente.destroy({
       where: { cpf }
     });
   },

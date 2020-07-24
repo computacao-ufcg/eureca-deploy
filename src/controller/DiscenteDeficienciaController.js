@@ -1,15 +1,15 @@
-const Aluno = require('../models/Aluno');
+const Discente = require('../models/Discente');
 const Deficiencia = require('../models/Deficiencia');
-const AlunoDeficiencia = require('../models/AlunoDeficiencia');
+const DiscenteDeficiencia = require('../models/DiscenteDeficiencia');
 
 module.exports = {
   async store(req, res) {
     const { cpf } = req.headers;
     const { id_deficiencia } = req.params;
 
-    const aluno = await Aluno.findByPk(cpf);
+    const discente = await Discente.findByPk(cpf);
 
-    if (!aluno) {
+    if (!discente) {
       return res.json({ error: 'Student not found' });
     }
 
@@ -19,10 +19,10 @@ module.exports = {
       return res.json({ error: 'Deficiency not found' });
     }
 
-    const aluno_deficiencia = await AlunoDeficiencia.create({
-      cpf_aluno: cpf,
-      codigo_deficiencia: id_deficiencia
-    })
+    const aluno_deficiencia = await DiscenteDeficiencia.create({
+      cpf,
+      id_deficiencia
+    });
 
     return res.json(aluno_deficiencia);
   }
