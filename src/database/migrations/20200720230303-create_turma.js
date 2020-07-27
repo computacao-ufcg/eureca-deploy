@@ -13,6 +13,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Disciplina', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       turma: {
         type: Sequelize.INTEGER,
@@ -26,10 +28,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Horario', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       id_sala: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'Sala', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       }
     });
   },

@@ -2,7 +2,7 @@
 
 const path = require('path');
 const { readFile, buildDescricao } = require('../../database/populateDB');
-var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'cor.csv');
+var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'Cor.data');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

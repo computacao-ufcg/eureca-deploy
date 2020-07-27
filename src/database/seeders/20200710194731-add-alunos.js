@@ -2,7 +2,7 @@
 
 const path = require('path');
 const { readFile, buildDiscentes } = require('../../database/populateDB');
-var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'aluno.csv');
+var filePath = path.resolve(__dirname, '..', '..', '..', 'data', 'Discente.data');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
