@@ -14,13 +14,28 @@ const readFile = (file) => {
   return generosSplitted;
 }
 
-// Função responsável por preparar os dados de tabelas que possuem apenas um
-//um atributo "nome" (exceto o id) para inserção no banco de dados.
-const buildNomes = (nomes) => {
+// Função responsável por preparar os dados de tabelas (que possuem apenas o campo
+//"descricao" como colunas (exceto o id)) para inserção no banco de dados.
+const buildDescricao = descricoes => {
   const dados = [];
-  for (let i = 0; i < nomes.length; i++) {
+  for (let i = 0; i < descricoes.length; i++) {
     dados.push({
-      nome: nomes[i]
+      descricao: descricoes[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de disciplinas para inserção no banco de dados.
+const buildDisciplinas = disciplinas => {
+  const dados = [];
+  for (let i = 0; i < disciplinas.length; i++) {
+    const tokens_disciplina = disciplinas[i].split(';');
+    dados.push({
+      codigo: tokens_disciplina[0],
+      creditos: tokens_disciplina[1],
+      horas: tokens_disciplina[2],
+      nome: tokens_disciplina[3],
     });
   }
   return dados;
@@ -39,13 +54,54 @@ const buildNaturalidades = (municipios) => {
   return dados;
 }
 
-// Função responsável por preparar os dados de tabelas (que possuem apenas o campo
-//"descricao" como colunas (exceto o id)) para inserção no banco de dados.
-const buildDescricao = descricoes => {
+// Função responsável por preparar os dados de tabelas que possuem apenas um
+//um atributo "nome" (exceto o id) para inserção no banco de dados.
+const buildNomes = (nomes) => {
   const dados = [];
-  for (let i = 0; i < descricoes.length; i++) {
+  for (let i = 0; i < nomes.length; i++) {
     dados.push({
-      descricao: descricoes[i]
+      nome: nomes[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de professores para inserção no banco de dados.
+const buildProfessores = (professores) => {
+  const dados = [];
+  for (let i = 0; i < professores.length; i++) {
+    dados.push({
+      siape: professores[i]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados de turmas para inserção no banco de dados.
+const buildTurmas = (turmas) => {
+  const dados = [];
+  for (let i = 0; i < turmas.length; i++) {
+    const tokens_turmas = turmas[i].split(';');
+    dados.push({
+      id_disciplina: tokens_turmas[0],
+      turma: tokens_turmas[1],
+      periodo: tokens_turmas[2],
+      id_horario: tokens_turmas[3],
+      id_sala: tokens_turmas[4]
+    });
+  }
+  return dados;
+}
+
+// Função responsável por preparar os dados do relacionamento entre turma e professores para
+//inserção no banco de dados.
+const buildTurmaProfessores = (turmas_professores) => {
+  const dados = [];
+  for (let i = 0; i < turmas_professores.length; i++) {
+    const tokens_turmas_professores = turmas_professores[i].split(';');
+    dados.push({
+      id_turma: tokens_turmas_professores[0],
+      siape: tokens_turmas_professores[1],
     });
   }
   return dados;
@@ -113,9 +169,13 @@ const buildDiscentesVinculos = (aluno_vinculos) => {
 module.exports = { 
   readFile,
   buildDescricao,
+  buildDisciplinas,
+  buildNaturalidades,
+  buildNomes,
+  buildProfessores,
+  buildTurmas,
+  buildTurmaProfessores,
   buildDiscentes,
   buildDiscentesDeficiencias,
   buildDiscentesVinculos,
-  buildNaturalidades,
-  buildNomes,
 }
