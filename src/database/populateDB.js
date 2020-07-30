@@ -83,11 +83,11 @@ const buildTurmas = (turmas) => {
   for (let i = 0; i < turmas.length; i++) {
     const tokens_turmas = turmas[i].split(';');
     dados.push({
-      id_disciplina: tokens_turmas[0],
-      turma: tokens_turmas[1],
+      id_disciplina: Number(tokens_turmas[0]),
+      turma: Number(tokens_turmas[1]),
       periodo: tokens_turmas[2],
-      id_horario: tokens_turmas[3],
-      id_sala: tokens_turmas[4]
+      id_horario: Number(tokens_turmas[3]),
+      id_sala: Number(tokens_turmas[4]),
     });
   }
   return dados;
@@ -100,7 +100,7 @@ const buildTurmaProfessores = (turmas_professores) => {
   for (let i = 0; i < turmas_professores.length; i++) {
     const tokens_turmas_professores = turmas_professores[i].split(';');
     dados.push({
-      id_turma: tokens_turmas_professores[0],
+      id_turma: Number(tokens_turmas_professores[0]),
       siape: tokens_turmas_professores[1],
     });
   }
@@ -149,6 +149,51 @@ const buildDiscentesDeficiencias = (aluno_deficiencias) => {
   return dados;
 }
 
+// Função responsável por preparar os dados do relacionamento entre discente e 
+//disciplinas para inserção no banco de dados.
+const buildDiscenteDisciplinas = (aluno_disciplinas) => {
+  const dados = [];
+  for (let i = 0; i < aluno_disciplinas.length; i++) {
+    const tokens_aluno_disciplinas = aluno_disciplinas[i].split(';');
+
+    // verifica se o id_turma é válido ou não
+    if (tokens_aluno_disciplinas[1] === "") {
+      tokens_aluno_disciplinas[1] = null;
+    } else {
+      tokens_aluno_disciplinas[1] = Number(tokens_aluno_disciplinas[1]);
+    }
+
+    // substituindo a "," por "." nos valores de ponto flutuante válidos, e caso não haja
+    //valor válido, é assumido null.
+    for (let j = 2; j < tokens_aluno_disciplinas.length - 1; j++) {
+      if (tokens_aluno_disciplinas[j] === "") {
+        tokens_aluno_disciplinas[j] = null;
+      } else {
+        tokens_aluno_disciplinas[j] = Number(tokens_aluno_disciplinas[j].replace(',', '.'));
+      }
+    }
+
+    dados.push({
+      matricula: tokens_aluno_disciplinas[0],
+      id_turma: tokens_aluno_disciplinas[1],
+      num_faltas: tokens_aluno_disciplinas[2],
+      nota1: tokens_aluno_disciplinas[3],
+      nota2: tokens_aluno_disciplinas[4],
+      nota3: tokens_aluno_disciplinas[5],
+      nota4: tokens_aluno_disciplinas[6],
+      nota5: tokens_aluno_disciplinas[7],
+      nota6: tokens_aluno_disciplinas[8],
+      nota7: tokens_aluno_disciplinas[9],
+      nota8: tokens_aluno_disciplinas[10],
+      media_parcial: tokens_aluno_disciplinas[11],
+      prova_final: tokens_aluno_disciplinas[12],
+      media_final: tokens_aluno_disciplinas[13],
+      id_situacao: Number(tokens_aluno_disciplinas[14]),
+    });
+  }
+  return dados;
+}
+
 // Função responsável por preparar os dados de vínculos de discentes para 
 //inserção no banco de dados.
 const buildDiscentesVinculos = (aluno_vinculos) => {
@@ -166,6 +211,20 @@ const buildDiscentesVinculos = (aluno_vinculos) => {
   return dados;
 }
 
+// Função responsável por preparar os dados de faltas para inserção no banco de dados.
+const buildFaltas = (faltas) => {
+  const dados = [];
+  for (let i = 0; i < faltas.length; i++) {
+    const tokens_faltas = faltas[i].split(';');
+    dados.push({
+      matricula: tokens_faltas[0],
+      id_turma: Number(tokens_faltas[1]),
+      num_aula: Number(tokens_faltas[2]),
+    });
+  }
+  return dados;
+}
+
 module.exports = { 
   readFile,
   buildDescricao,
@@ -177,5 +236,7 @@ module.exports = {
   buildTurmaProfessores,
   buildDiscentes,
   buildDiscentesDeficiencias,
+  buildDiscenteDisciplinas,
   buildDiscentesVinculos,
+  buildFaltas,
 }

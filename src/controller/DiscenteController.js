@@ -80,7 +80,7 @@ module.exports = {
     const { query_front } = req.body;
 
     if (table_name) {
-      const query = `SELECT * FROM \"${table_name}\"`
+      const query = `SELECT * FROM \"${table_name}\" LIMIT 40`
       const [result] = await connection.query(query);
       return res.json(result);
     }

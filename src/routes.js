@@ -53,6 +53,6 @@ routes.get('/discentes/:cpf', DiscenteController.show);
 routes.delete('/discentes/:cpf', DiscenteController.remove);
 
 // listagem por consulta sql
-routes.get('/discentes', DiscenteController.list);
+routes.get('/list-table', DiscenteController.list);
 
 module.exports = routes;

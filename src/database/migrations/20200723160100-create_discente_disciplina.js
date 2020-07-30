@@ -6,24 +6,21 @@ module.exports = {
       matricula: {
         type: Sequelize.STRING(9),
         allowNull: false,
-        // references: { model: 'DiscenteVinculo', key: 'matricula' },
-        // onUpdate: 'CASCADE',
-        // onDelete: 'CASCADE',
       },
       id_turma: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: 'Turma', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       num_faltas: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       nota1: {
         type: Sequelize.REAL,
-        allowNull: false,
+        allowNull: true,
       },
       nota2: {
         type: Sequelize.REAL,
@@ -55,19 +52,19 @@ module.exports = {
       },
       media_parcial: {
         type: Sequelize.REAL,
-        allowNull: false,
+        allowNull: true,
       },
       prova_final: {
         type: Sequelize.REAL,
-        allowNull: false,
+        allowNull: true,
       },
       media_final: {
         type: Sequelize.REAL,
-        allowNull: false,
+        allowNull: true,
       },
       id_situacao: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: 'SituacaoDisciplina', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',

@@ -6,14 +6,13 @@ module.exports = {
       matricula: {
         type: Sequelize.STRING(9),
         allowNull: false,
-        // references: { model: 'DiscenteVinculo', key: 'matricula' },
-        // onUpdate: 'CASCADE',
-        // onDelete: 'CASCADE',
       },
       id_turma: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Turma', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       num_aula: {
         type: Sequelize.INTEGER,
