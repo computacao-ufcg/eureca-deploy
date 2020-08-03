@@ -17,6 +17,7 @@ const NaturalidadeController = require('./controller/NaturalidadeController');
 const PaisController = require('./controller/PaisController');
 const SituacaoDiscenteController = require('./controller/SituacaoDiscenteController');
 const SituacaoVinculoController = require('./controller/SituacaoVinculoController');
+const GeneralController = require('./controller/GeneralController');
 
 const routes = express.Router();
 
@@ -53,6 +54,6 @@ routes.get('/discentes/:cpf', DiscenteController.show);
 routes.delete('/discentes/:cpf', DiscenteController.remove);
 
 // listagem por consulta sql
-routes.get('/list-table', DiscenteController.list);
+routes.get('/tables', GeneralController.list);
 
 module.exports = routes;
