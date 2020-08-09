@@ -10,7 +10,7 @@ Antes de tudo, é necessário ter o docker e o postgres instalados na máquina v
 
 Para instalar o docker em distribuições linux ubuntu, siga [aqui](https://docs.docker.com/engine/install/ubuntu/).
 
-Para instalar o postgres (também no ubuntu) em sua versão mais recente, basta seguir este [gist](). 
+Para instalar o postgres (também no ubuntu) em sua versão mais recente, basta seguir este [gist](https://github.com/computacao-ufcg/pdc-deploy/blob/master/help_install/postgres-install). 
 
 - Com o docker instalado, é necessário adicionar o seu user ao grupo de usuários do docker, usando o seguinte comando e depois reiniciar a máquina.
 ```
@@ -50,7 +50,7 @@ Após isso, o usuário estará na interface de linha de comando do postgres, par
 
 ### Para testes em ambiente de desenvolvimento
 
-**Obs:** É necessário ter o node e o yarn instalados na máquina em que o projeto for executado, para instalar o node e o yarn siga o seguinte [gist](), no momento é preciso instalar apenas na máquina em que o repositório será clonado, já que os comandos serão executados no banco de dados da Máquina Virtual, e posteriormente tudo funcionará a partir de contêineres, eliminando essa necessidade de ter várias ferramentas instaladas localmente.
+**Obs:** É necessário ter o node e o yarn instalados na máquina em que o projeto for executado, para instalar o node e o yarn siga o seguinte [gist](https://github.com/computacao-ufcg/pdc-deploy/blob/master/help_install/nodejs-yarn-install), no momento é preciso instalar apenas na máquina em que o repositório será clonado, já que os comandos serão executados no banco de dados da Máquina Virtual, e posteriormente tudo funcionará a partir de contêineres, eliminando essa necessidade de ter várias ferramentas instaladas localmente.
 
 Clonar o repositório
 ```
