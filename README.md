@@ -1,7 +1,6 @@
 # configurações necessárias:
 
-**OBS.:**Antes de executar o arquivo deploy.sh é necessário configurar o arquivo db.properties para que o container do backend seja inicializado normalmente.
-
+**OBS.:** Antes de executar o arquivo deploy.sh é necessário configurar os arquivos db.properties e api.js para que os containers (frontend e backend) sejam inicializados normalmente.
 
 # pdc-backend
 
