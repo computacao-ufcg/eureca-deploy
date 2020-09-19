@@ -102,6 +102,70 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      curriculo: {
+        type: Sequelize.STRING(4),
+        allowNull: false,
+      },
+      carga_hor_obrig_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      cred_obrig_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      carga_hor_opt_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      cred_opt_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      carga_hor_comp_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      cred_comp_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      cra: {
+        type: Sequelize.REAL,
+        allowNull: false,
+      },
+      mc: {
+        type: Sequelize.REAL,
+        allowNull: false,
+      },
+      iea: {
+        type: Sequelize.REAL,
+        allowNull: false,
+      },
+      per_int: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      tranc: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      mat_inst: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      mob_estudantil: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      cred_matriculados: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      media_geral_ingresso: {
+        type: Sequelize.REAL,
+        allowNull: true,
+      }
     });
   },
 
