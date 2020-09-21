@@ -20,7 +20,7 @@ const buildDescricao = descricoes => {
   const dados = [];
   for (let i = 0; i < descricoes.length; i++) {
     dados.push({
-      descricao: descricoes[i]
+      descricao: descricoes[i].trim()
     });
   }
   return dados;
