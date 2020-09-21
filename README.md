@@ -1,3 +1,7 @@
+# configurações necessárias:
+
+**OBS.:** Antes de executar o arquivo deploy.sh é necessário configurar os arquivos db.properties e api.js para que os containers (frontend e backend) sejam inicializados normalmente.
+
 # pdc-backend
 
 Trata-se de um serviço que tem a função de prover a infraestrutura de banco de dados. Aqui o banco de dados é criado, tabelas e relacionamentos são definidos e, por fim é populado com os dados, então esse banco de dados é disponibilizado para que uma api possa acessá-lo.
