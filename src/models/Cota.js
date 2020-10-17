@@ -11,7 +11,7 @@ class Cota extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Discente, { foreignKey: 'id_cota', as: 'cota-aluno' });
+    this.hasOne(models.DiscenteVinculo, { foreignKey: 'id_cota', as: 'cota-aluno' });
   }
 }
 

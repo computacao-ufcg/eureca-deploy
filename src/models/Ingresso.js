@@ -11,7 +11,7 @@ class Ingresso extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Discente, { foreignKey: 'id_ingresso', as: 'ingresso-aluno' });
+    this.hasOne(models.DiscenteVinculo, { foreignKey: 'id_ingresso', as: 'ingresso-aluno' });
   }
 }
 

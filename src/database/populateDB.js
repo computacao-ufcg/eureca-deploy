@@ -113,50 +113,20 @@ const buildDiscentes = (alunos) => {
   for (let i = 0; i < alunos.length; i++) {
     const tokens_aluno = alunos[i].split(';');
 
-    // caso no lugar da Nota de ingresso ENEM/Vestibular seja igual a um '-', este é
-    // substituído por null.
-    if (tokens_aluno[32] === '-') {
-      tokens_aluno[32] = null
-    } else {
-      tokens_aluno[32] = Number(tokens_aluno[32].replace(',', '.'))
-    }
-
     dados.push({
       cpf: tokens_aluno[0],
       nome: tokens_aluno[1],
-      id_situacao: Number(tokens_aluno[2]),
-      semestre_situacao: tokens_aluno[3],
-      id_ingresso: Number(tokens_aluno[4]),
-      semestre_ingresso: tokens_aluno[5],
-      ano_nascimento: Number(tokens_aluno[6]),
-      id_cota: Number(tokens_aluno[7]),
-      id_tipo_escola: Number(tokens_aluno[8]),
-      ano_conclusao_ensino_medio: Number(tokens_aluno[9]),
-      email: tokens_aluno[10],
-      id_genero: Number(tokens_aluno[11]),
-      id_estado_civil: Number(tokens_aluno[12]),
-      id_nacionalidade: Number(tokens_aluno[13]),
-      id_pais_origem: Number(tokens_aluno[14]),
-      id_naturalidade: Number(tokens_aluno[15]),
-      id_cor: Number(tokens_aluno[16]),
-      curriculo: tokens_aluno[17],
-      carga_hor_obrig_int: Number(tokens_aluno[18]),
-      cred_obrig_int: Number(tokens_aluno[19]),
-      carga_hor_opt_int: Number(tokens_aluno[20]),
-      cred_opt_int: Number(tokens_aluno[21]),
-      carga_hor_comp_int: Number(tokens_aluno[22]),
-      cred_comp_int: Number(tokens_aluno[23]),
-      cra: Number(tokens_aluno[24].replace(',', '.')),
-      mc: Number(tokens_aluno[25].replace(',', '.')),
-      iea: Number(tokens_aluno[26].replace(',', '.')),
-      per_int: Number(tokens_aluno[27]),
-      tranc: Number(tokens_aluno[28]),
-      mat_inst: Number(tokens_aluno[29]),
-      mob_estudantil: Number(tokens_aluno[30]),
-      cred_matriculados: Number(tokens_aluno[31]),
-      media_geral_ingresso: tokens_aluno[32],
+      ano_nascimento: Number(tokens_aluno[2]),
+      email: tokens_aluno[3],
+      id_genero: Number(tokens_aluno[4]),
+      id_estado_civil: Number(tokens_aluno[5]),
+      id_nacionalidade: Number(tokens_aluno[6]),
+      id_pais_origem: Number(tokens_aluno[7]),
+      id_naturalidade: Number(tokens_aluno[8]),
+      id_cor: Number(tokens_aluno[9])
     });
   }
+
   return dados;
 }
 
@@ -225,12 +195,58 @@ const buildDiscentesVinculos = (aluno_vinculos) => {
   const dados = [];
   for (let i = 0; i < aluno_vinculos.length; i++) {
     const tokens_aluno = aluno_vinculos[i].split(';');
+
+    // caso no lugar da Nota de ingresso ENEM/Vestibular seja igual a um '-', este é
+    // substituído por null.
+    if (tokens_aluno[26] === '' || isNaN(tokens_aluno[26])) {
+      tokens_aluno[26] = null
+    } else {
+      tokens_aluno[26] = Number(tokens_aluno[26].replace(',', '.'));
+    }
+
+    for (let j=8; j <= 25; j++) {
+      if (j === 18 || j === 19 || j === 20) {
+        if (tokens_aluno[j] === '') {
+          tokens_aluno[j] = null;
+        } else {
+          tokens_aluno[j] = Number(tokens_aluno[j].replace(',', '.'));
+        }
+      }
+      else if (Number(tokens_aluno[j]) === 0) {
+        tokens_aluno[j] = null;
+      } else {
+        tokens_aluno[j] = Number(tokens_aluno[j]);
+      }
+    }
+
     dados.push({
       cpf: tokens_aluno[0],
       matricula: tokens_aluno[1],
-      id_curso: Number(tokens_aluno[2]),
-      id_situacao_vinculo: Number(tokens_aluno[3]),
-      semestre_vinculo: tokens_aluno[4],
+      id_ingresso: Number(tokens_aluno[2]) === 0 ? null : Number(tokens_aluno[2]),
+      semestre_ingresso: tokens_aluno[3],
+      id_curso: Number(tokens_aluno[4]),
+      id_situacao: Number(tokens_aluno[5]),
+      semestre_situacao: tokens_aluno[6],
+      id_situacao_vinculo: Number(tokens_aluno[7]),
+      id_cota: Number(tokens_aluno[8]) === 0 ? null : Number(tokens_aluno[8]),
+      id_tipo_escola: Number(tokens_aluno[9]) === 0 ? null : Number(tokens_aluno[9]),
+      ano_conclusao_ensino_medio: tokens_aluno[10],
+      curriculo: tokens_aluno[11],
+      carga_hor_obrig_int: tokens_aluno[12],
+      cred_obrig_int: tokens_aluno[13],
+      carga_hor_opt_int: tokens_aluno[14],
+      cred_opt_int: tokens_aluno[15],
+      carga_hor_comp_int: tokens_aluno[16],
+      cred_comp_int: tokens_aluno[17],
+      cra: tokens_aluno[18],
+      mc: tokens_aluno[19],
+      iea: tokens_aluno[20],
+      per_int: tokens_aluno[21],
+      tranc: tokens_aluno[22],
+      mat_inst: tokens_aluno[23],
+      mob_estudantil: tokens_aluno[24],
+      cred_matriculados: tokens_aluno[25],
+      media_geral_ingresso: tokens_aluno[26],
     });
   }
   return dados;
