@@ -23,7 +23,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      semestre_ingresso: {
+      periodo_ingresso: {
         type: Sequelize.STRING(6),
         allowNull: false,
       },
@@ -41,7 +41,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      semestre_situacao: {
+      periodo_situacao: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
