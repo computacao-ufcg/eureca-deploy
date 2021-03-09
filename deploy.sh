@@ -16,7 +16,7 @@ API_TAG_PATTERN="Api_tag"
 API_TAG=$(grep $API_TAG_PATTERN $EURECA_CONF_FILE_PATH | cut -d"=" -f2-)
 
 echo "Removendo containers"
-sudo docker stop pdc-app pdc-api
+sudo docker stop eureca-frontend-container eureca-as-container  
 sudo docker rm pdc-app pdc-api
 
 echo "Build e criação de containers"
