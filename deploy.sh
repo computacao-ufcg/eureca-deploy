@@ -51,15 +51,19 @@ sudo docker stop eureca-frontend-container alumni-site-container eureca-as-conta
 sudo docker rm eureca-frontend-container alumni-site-container eureca-as-container eureca-backend-container alumni-backend-container
 
 echo "Build Images and running containers"
+
+# Start Frontend
+## Eureca Frontend
 echo "Build to eureca frontend:"
-sudo docker pull eureca/eureca-frontend:$EURECA_FRONTEND_TAG
+sudo docker pull eureca/eureca-frontend:$EF_TAG
 
 echo "Creating Container"
 sudo docker run -itd --name eureca-frontend-container \
-    -p $EURECA_FRONTEND_PORT:3000 \
+    -p $EF_PORT:3000 \
     -v $(pwd)/services/eureca-frontend/api.js:/app/src/services/api.js \
-    eureca/eureca-frontend:$EURECA_FRONTEND_TAG
+    eureca/eureca-frontend:$EF_TAG
 
+## Alumni Site
 echo "Build to alumni site:"
 sudo docker pull eureca/alumni-site:$ALUMNI_SITE_TAG
 
@@ -73,37 +77,37 @@ sudo docker run -itd --name alumni-site-container \
 
 ## Eureca Authentication Service
 echo "Build to eureca as:"
-sudo docker pull eureca/eureca-as:$EURECA_AS_TAG
+sudo docker pull eureca/eureca-as:$EAS_TAG
 
 echo "Creating Container"
 sudo docker run -itd --name eureca-as-container \
-    -p $EURECA_AS_PORT:8080 \
-    -v ~/privates/private_eas/private:/root/eureca-as/src/main/resources/private \
-    eureca/eureca-as:$EURECA_AS_TAG
+    -p $EAS_PORT:8080 \
+    -v ${HOME}/privates/private_eas/private:/root/eureca-as/src/main/resources/private \
+    eureca/eureca-as:$EAS_TAG
 
 ## Eureca Backend
 echo "Build to eureca backend:"
-sudo docker pull eureca/eureca-backend:$EURECA_BACKEND_TAG
+sudo docker pull eureca/eureca-backend:$EB_TAG
 
 echo "Creating Container"
 sudo docker run -itd --name eureca-backend-container \
-    -p $EURECA_BACKEND_PORT:8081 \
-    -v ~/privates/private_eb/private:/root/eureca-backend/src/main/resources/private \
-    eureca/eureca-backend:$EURECA_BACKEND_TAG
+    -p $EB_PORT:8081 \
+    -v ${HOME}/privates/private_eb/private:/root/eureca-backend/src/main/resources/private \
+    eureca/eureca-backend:$EB_TAG
 
 ## Alumni Backend
 echo "Build to alumni backend:"
-sudo docker pull eureca/alumni-backend:$ALUMNI_BACKEND_TAG
+sudo docker pull eureca/alumni-backend:$AB_TAG
 
 echo "Creating Container"
 sudo docker run -itd --name alumni-backend-container \
-    -p $ALUMNI_BACKEND_PORT:8082 \
-    -v ~/privates/private_ab/private:/root/alumni-backend/src/main/resources/private \
-    eureca/alumni-backend:$ALUMNI_BACKEND_TAG
+    -p $AB_PORT:8082 \
+    -v ${HOME}/privates/private_ab/private:/root/alumni-backend/src/main/resources/private \
+    eureca/alumni-backend:$AB_TAG
 
 
 # Start Services
 
-docker exec -itd eureca_as_container /bin/bash -c "mvn spring-boot:run" &
-docker exec -itd eureca_backend_container /bin/bash -c "mvn spring-boot:run" & 
-docker exec -itd alumni_backend_container /bin/bash -c "mvn spring-boot:run"
+docker exec -itd eureca-as-container /bin/bash -c "mvn spring-boot:run" &
+docker exec -itd eureca-backend-container /bin/bash -c "mvn spring-boot:run" & 
+docker exec -itd alumni-backend-container /bin/bash -c "mvn spring-boot:run"
