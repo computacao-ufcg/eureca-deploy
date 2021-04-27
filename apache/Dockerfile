@@ -1,14 +1,40 @@
-FROM ubuntu:latest
-
+FROM ubuntu:16.04
 RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get install -y apache2
+RUN apt-get install -y apache2-utils
+RUN apt-get install -y nano vim
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_PID_FILE /var/run/apache2.pid
-ENV APACHE_RUN_DIR /var/run/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV LANG C
+# Copy configs to inside container.
+
+# Config apache2
+COPY ./configs/apache2.conf /etc/apache2/
+
+# Configs Eureca and Alumni
+COPY ./configs/alumni.conf /etc/apache2/sites-available/
+COPY ./configs/eureca.conf /etc/apache2/sites-available/
+
+RUN chmod 644 /etc/apache2/sites-available/alumni.conf
+RUN chmod 644 /etc/apache2/sites-available/eureca.conf
+
+# Copy the build files to inside container.
+COPY -a ./builds/alumni/build/. /var/www/alumni/
+COPY -a ./builds/eureca/build/. /var/www/eureca/
+
+# Comands
+RUN a2enmod proxy proxy_http rewrite
+# Removing default page
+RUN a2dissite 000-default.conf 
+# Add the news sites
+RUN a2ensite  eurecafront
+RUN a2ensite  alumnisite
+
+ENTRYPOINT [ "apache2ctl" ]
+CMD ["-DFOREGROUND"]
+
+
+
+
+
+
+# apt-get -y install nano.

@@ -82,7 +82,7 @@ sudo docker pull eureca/eureca-as:$EAS_TAG
 echo "Creating Container"
 sudo docker run -itd --name eureca-as-container \
     -p $EAS_PORT:8080 \
-    -v ${HOME}privates/private_eas/private:/root/eureca-as/src/main/resources/private \
+    -v ${HOME}/privates/private_eas/private:/root/eureca-as/src/main/resources/private \
     eureca/eureca-as:$EAS_TAG
 
 ## Eureca Backend
@@ -92,7 +92,7 @@ sudo docker pull eureca/eureca-backend:$EB_TAG
 echo "Creating Container"
 sudo docker run -itd --name eureca-backend-container \
     -p $EB_PORT:8081 \
-    -v ${HOME}privates/private_eb/private:/root/eureca-backend/src/main/resources/private \
+    -v ${HOME}/privates/private_eb/private:/root/eureca-backend/src/main/resources/private \
     eureca/eureca-backend:$EB_TAG
 
 ## Alumni Backend
@@ -102,7 +102,7 @@ sudo docker pull eureca/alumni-backend:$AB_TAG
 echo "Creating Container"
 sudo docker run -itd --name alumni-backend-container \
     -p $AB_PORT:8082 \
-    -v ${HOME}privates/private_ab/private:/root/alumni-backend/src/main/resources/private \
+    -v ${HOME}/privates/private_ab/private:/root/alumni-backend/src/main/resources/private \
     eureca/alumni-backend:$AB_TAG
 
 
