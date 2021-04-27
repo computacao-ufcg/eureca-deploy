@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 // Starting points
-const START_POINT = "";
+const START_POINT = "http://localhost";
 const EURECA_AS = `${START_POINT}:8080/`;
 const EURECA_BACKEND = `${START_POINT}:8081/`;
 const ALUMNI_AS = `${START_POINT}:8082/`;
