@@ -18,23 +18,16 @@ RUN chmod 644 /etc/apache2/sites-available/alumni.conf
 RUN chmod 644 /etc/apache2/sites-available/eureca.conf
 
 # Copy the build files to inside container.
-COPY -a ./builds/alumni/build/. /var/www/alumni/
-COPY -a ./builds/eureca/build/. /var/www/eureca/
+COPY ./builds/alumni/build/. /var/www/alumni/
+COPY ./builds/eureca/build/. /var/www/eureca/
 
 # Comands
 RUN a2enmod proxy proxy_http rewrite
 # Removing default page
 RUN a2dissite 000-default.conf 
-# Add the news sites
-RUN a2ensite  eurecafront
-RUN a2ensite  alumnisite
+# Add the new sites
+RUN a2ensite eureca
+RUN a2ensite alumni
 
 ENTRYPOINT [ "apache2ctl" ]
 CMD ["-DFOREGROUND"]
-
-
-
-
-
-
-# apt-get -y install nano.
