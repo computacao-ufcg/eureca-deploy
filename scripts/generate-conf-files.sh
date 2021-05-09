@@ -104,19 +104,9 @@ AS_RSA_KEY_PATH=$AS_DIR_PATH/"rsa_key.pem"
 mkdir -p $AS_DIR_PATH
 cp $AS_CONF_FILE_PATH $AS_DIR_PATH/$AS_CONF_FILE_NAME
 
-## Adding provider ID and user names with admin role
+## Adding user names with admin role and provider ID
+echo "admin=as_admin" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
 echo "provider_id="$HOST_FQDN >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
-echo "admin=as_admin"
-
-## Creating users DB
-DB_FILE_NAME="users.db"
-touch $AS_DIR_PATH/$DB_FILE_NAME
-chmod 600 $AS_DIR_PATH/$DB_FILE_NAME
-AS_ADMIN_PASSWORD=$(pwgen 10 1)
-AS_USER_PASSWORD=$(pwgen 10 1)
-echo "as_admin,"$AS_ADMIN_PASSWORD > $AS_DIR_PATH/$DB_FILE_NAME
-echo "as_user_pass,"$AS_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
-echo "demo,"$DEMO_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 
 ## Creating and adding key pair
 echo "" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
@@ -127,6 +117,19 @@ chmod 600 $AS_PRIVATE_KEY_PATH
 rm $AS_RSA_KEY_PATH
 echo "public_key_file_path="$AS_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa.pub" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
 echo "private_key_file_path="$AS_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
+
+## Creating users DB
+DB_FILE_NAME="users.db"
+touch $AS_DIR_PATH/$DB_FILE_NAME
+chmod 600 $AS_DIR_PATH/$DB_FILE_NAME
+AS_ADMIN_PASSWORD=$(pwgen 10 1)
+AS_USER_PASSWORD=$(pwgen 10 1)
+ADMIN_USER_NAME="as_admin"
+AS_USER_NAME="as_user"
+DEMO_USER_NAME="demo"
+echo $ADMIN_USER_NAME","$AS_ADMIN_PASSWORD > $AS_DIR_PATH/$DB_FILE_NAME
+echo $AS_USER_NAME","$AS_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
+echo $DEMO_USER_NAME","$DEMO_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 
 # ALUMNI conf-file generation
 ## Setting ALUMNI variables
@@ -146,10 +149,10 @@ chmod 600 $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 echo "as_url=$PROTOCOL$SERVICE_HOST_IP" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 echo "as_port=$AS_PORT" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 echo "backend_url=$PROTOCOL$SERVICE_HOST_IP" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
-echo "backend_port=$AS_PORT" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
+echo "backend_port=$EURECA_PORT" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 echo "" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 echo "username="$AS_USER_NAME >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
-echo "password="$AS_PASSWORD >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
+echo "password="$AS_USER_PASSWORD >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 
 ## Creating and adding key pair
 echo "" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
@@ -180,7 +183,6 @@ chmod 600 $EURECA_DIR_PATH/$EURECA_CONF_FILE_NAME
 ## Adding properties
 echo "as_url=$PROTOCOL$SERVICE_HOST_IP" >> $EURECA_DIR_PATH/$EURECA_CONF_FILE_NAME
 echo "as_port=$AS_PORT" >> $EURECA_DIR_PATH/$EURECA_CONF_FILE_NAME
-echo "" >> $EURECA_DIR_PATH/$EURECA_CONF_FILE_NAME
 
 ## Creating and adding key pair
 echo "" >> $EURECA_DIR_PATH/$EURECA_CONF_FILE_NAME
@@ -195,7 +197,7 @@ echo "eureca_privatekey="$EURECA_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa" >> $EUREC
 ## Copying configuration files
 cp -f $CONF_FILES_DIR_PATH/"eureca/maps.conf" $EURECA_DIR_PATH
 mkdir -p $EURECA_DIR_PATH/tables
-cp $EURECA_TABLES_DIR/* $EURECA_DIR_PATH/tables
+cp -f $EURECA_TABLES_DIR/* $EURECA_DIR_PATH/tables
 
 # FRONTEND conf-file generation
 FRONTEND_DIR_PATH="./tmp/conf-files/frontend"
