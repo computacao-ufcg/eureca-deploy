@@ -76,7 +76,7 @@ sudo docker run -itd --name eureca-as \
     eureca/eureca-as:$EURECA_TAG
 
 AS_CONF_FILE_PATH="src/main/resources/private/as.conf"
-sudo docker exec eureca-as /bin/bash -c "cat $BUILD_FILE_NAME >> $AS_CONF_FILE_PATH"
+sudo docker exec eureca-as /bin/bash -c "cat $BUILD_FILE_NAME >> $AS_CONF_FILE_PATH" &
 sudo docker exec eureca-as /bin/bash -c "./mvnw spring-boot:run -X > log.out 2> log.err" &
 
 # Start Eureca Backend
@@ -126,6 +126,6 @@ echo "/usr/sbin/service apache2 restart" >> $ENABLE_MODULES_SCRIPT
 
 sudo chmod +x $ENABLE_MODULES_SCRIPT
 sudo docker cp $ENABLE_MODULES_SCRIPT $APACHE_CONTAINER_NAME:/$ENABLE_MODULES_SCRIPT
-sudo docker exec $APACHE_CONTAINER_NAME /$ENABLE_MODULES_SCRIPT
-sudo docker exec $APACHE_CONTAINER_NAME /bin/bash -c "rm /$ENABLE_MODULES_SCRIPT"
+sudo docker exec $APACHE_CONTAINER_NAME /$ENABLE_MODULES_SCRIPT &
+sudo docker exec $APACHE_CONTAINER_NAME /bin/bash -c "rm /$ENABLE_MODULES_SCRIPT" &
 rm $ENABLE_MODULES_SCRIPT
