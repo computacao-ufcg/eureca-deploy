@@ -4,10 +4,6 @@
   vars:
     ansible_python_interpreter: "/usr/bin/env python3"
   tasks:
-    - name: "Installing aptitude"
-      apt:
-        name: aptitude
-        update_cache: yes
     - name: "Installing misc packages"
       apt:
         name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
