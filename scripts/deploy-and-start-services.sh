@@ -12,8 +12,8 @@ ALUMNI_PORT_PATTERN="alumni_port"
 ALUMNI_PORT=$(grep $ALUMNI_PORT_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
 FRONTEND_PORT_PATTERN="frontend_port"
 FRONTEND_PORT=$(grep $FRONTEND_PORT_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
-EURECA_PORT_PATTERN="eureca_port"
-EURECA_PORT=$(grep $EURECA_PORT_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
+BACKEND_PORT_PATTERN="backend_port"
+BACKEND_PORT=$(grep $BACKEND_PORT_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
 ALUMNI_SITE_PORT_PATTERN="alumni_site_port"
 ALUMNI_SITE_PORT=$(grep $ALUMNI_SITE_PORT_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
 HTTP_PORT_PATTERN="http_port"
@@ -36,15 +36,20 @@ FRONTEND_TAG=$(grep $FRONTEND_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f
 if [ -z ${FRONTEND_TAG// } ]; then
 	FRONTEND_TAG="latest"
 fi
-EURECA_TAG_PATTERN="eureca_tag"
-EURECA_TAG=$(grep $EURECA_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
-if [ -z ${EURECA_TAG// } ]; then
-	EURECA_TAG="latest"
+BACKEND_TAG_PATTERN="eureca_tag"
+BACKEND_TAG=$(grep $BACKEND_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
+if [ -z ${BACKEND_TAG// } ]; then
+	BACKEND_TAG="latest"
 fi
 ALUMNI_SITE_TAG_PATTERN="alumni_site_tag"
 ALUMNI_SITE_TAG=$(grep $ALUMNI_SITE_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
 if [ -z ${ALUMNI_SITE_TAG// } ]; then
 	ALUMNI_SITE_TAG="latest"
+fi
+APACHE_TAG_PATTERN="apache_tag"
+APACHE_TAG=$(grep $APACHE_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
+if [ -z ${APACHE_TAG// } ]; then
+	APACHE_TAG="latest"
 fi
 
 echo "Removing containers"
@@ -57,45 +62,43 @@ echo "Creating containers"
 sudo docker pull eureca/eureca-frontend:$FRONTEND_TAG
 sudo docker run -itd --name eureca-frontend \
     -p $FRONTEND_PORT:3000 \
-    -v $WORKDIR/conf-files/frontend/api.js:/app/src/services/api.js \
+    -v $WORK_DIR/conf-files/frontend/api.js:/app/src/services/api.js \
     eureca/eureca-frontend:$FRONTEND_TAG
 
 # Start Alumni Site
 sudo docker pull eureca/alumni-site:$ALUMNI_SITE_TAG
 sudo docker run -itd --name alumni-site \
     -p $ALUMNI_SITE_PORT:3001 \
-    -v $WORKDIR/conf-files/alumni-site/api.js:/app/src/services/api.js \
+    -v $WORK_DIR/conf-files/alumni-site/api.js:/app/src/services/api.js \
     eureca/alumni-site:$ALUMNI_SITE_TAG
 
 # Start Eureca AS
 
 sudo docker pull eureca/eureca-as:$AS_TAG
 sudo docker run -itd --name eureca-as \
-    -p $EAS_PORT:8080 \
-    -v $WORKDIR/conf-files/as:/root/eureca-as/src/main/resources/private \
-    eureca/eureca-as:$EURECA_TAG
+    -p $AS_PORT:8080 \
+    -v $WORK_DIR/conf-files/as:/root/eureca-as/src/main/resources/private \
+    eureca/eureca-as:$AS_TAG
 
-AS_CONF_FILE_PATH="src/main/resources/private/as.conf"
-sudo docker exec eureca-as /bin/bash -c "cat $BUILD_FILE_NAME >> $AS_CONF_FILE_PATH" &
-sudo docker exec eureca-as /bin/bash -c "./mvnw spring-boot:run -X > log.out 2> log.err" &
+sudo docker exec eureca-as /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
 
 # Start Eureca Backend
-sudo docker pull eureca/eureca-backend:$EURECA_TAG
+sudo docker pull eureca/eureca-backend:$BACKEND_TAG
 sudo docker run -itd --name eureca-backend \
-    -p $EURECA_PORT:8081 \
-    -v $WORDIR/conf-files/eureca:/root/eureca-backend/src/main/resources/private \
-    eureca/eureca-backend:$EURECA_TAG
+    -p $BACKEND_PORT:8081 \
+    -v $WORK_DIR/conf-files/backend:/root/eureca-backend/src/main/resources/private \
+    eureca/eureca-backend:$BACKEND_TAG
 
-docker exec eureca-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
+sudo docker exec eureca-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
 
 # Start Alumni Backend
 sudo docker pull eureca/alumni-backend:$ALUMNI_TAG
 sudo docker run -itd --name alumni-backend \
     -p $ALUMNI_PORT:8082 \
-    -v $WORKDIR/conf-files/alumni:/root/alumni-backend/src/main/resources/private \
+    -v $WORK_DIR/conf-files/alumni:/root/alumni-backend/src/main/resources/private \
     eureca/alumni-backend:$ALUMNI_TAG
 
-docker exec alumni-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
+sudo docker exec alumni-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
 
 # Start Apache
 sudo docker pull fogbow/apache-shibboleth-server:$APACHE_TAG
@@ -126,6 +129,6 @@ echo "/usr/sbin/service apache2 restart" >> $ENABLE_MODULES_SCRIPT
 
 sudo chmod +x $ENABLE_MODULES_SCRIPT
 sudo docker cp $ENABLE_MODULES_SCRIPT $APACHE_CONTAINER_NAME:/$ENABLE_MODULES_SCRIPT
-sudo docker exec $APACHE_CONTAINER_NAME /$ENABLE_MODULES_SCRIPT &
-sudo docker exec $APACHE_CONTAINER_NAME /bin/bash -c "rm /$ENABLE_MODULES_SCRIPT" &
+sudo docker exec $APACHE_CONTAINER_NAME /$ENABLE_MODULES_SCRIPT
+sudo docker exec $APACHE_CONTAINER_NAME /bin/bash -c "rm /$ENABLE_MODULES_SCRIPT"
 rm $ENABLE_MODULES_SCRIPT

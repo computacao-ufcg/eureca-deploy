@@ -131,6 +131,11 @@ echo $ADMIN_USER_NAME","$AS_ADMIN_PASSWORD > $AS_DIR_PATH/$DB_FILE_NAME
 echo $AS_USER_NAME","$AS_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 echo $DEMO_USER_NAME","$DEMO_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 
+## Creating empty files required
+touch $AS_DIR_PATH/employers.db
+touch $AS_DIR_PATH/employers.consolidated.db
+touch $AS_DIR_PATH/matches.db
+
 # ALUMNI conf-file generation
 ## Setting ALUMNI variables
 ALUMNI_DIR_PATH="./tmp/conf-files/alumni"
