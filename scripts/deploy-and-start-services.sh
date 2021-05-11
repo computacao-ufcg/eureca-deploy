@@ -36,7 +36,7 @@ FRONTEND_TAG=$(grep $FRONTEND_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f
 if [ -z ${FRONTEND_TAG// } ]; then
 	FRONTEND_TAG="latest"
 fi
-BACKEND_TAG_PATTERN="eureca_tag"
+BACKEND_TAG_PATTERN="backend_tag"
 BACKEND_TAG=$(grep $BACKEND_TAG_PATTERN $SERVICE_CONF_FILE_PATH | cut -d"=" -f2-)
 if [ -z ${BACKEND_TAG// } ]; then
 	BACKEND_TAG="latest"
@@ -80,7 +80,7 @@ sudo docker run -itd --name eureca-as \
     -v $WORK_DIR/conf-files/as:/root/eureca-as/src/main/resources/private \
     eureca/eureca-as:$AS_TAG
 
-sudo docker exec eureca-as /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
+sudo docker exec eureca-as /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
 
 # Start Eureca Backend
 sudo docker pull eureca/eureca-backend:$BACKEND_TAG
@@ -89,7 +89,7 @@ sudo docker run -itd --name eureca-backend \
     -v $WORK_DIR/conf-files/backend:/root/eureca-backend/src/main/resources/private \
     eureca/eureca-backend:$BACKEND_TAG
 
-sudo docker exec eureca-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
+sudo docker exec eureca-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
 
 # Start Alumni Backend
 sudo docker pull eureca/alumni-backend:$ALUMNI_TAG
@@ -98,7 +98,7 @@ sudo docker run -itd --name alumni-backend \
     -v $WORK_DIR/conf-files/alumni:/root/alumni-backend/src/main/resources/private \
     eureca/alumni-backend:$ALUMNI_TAG
 
-sudo docker exec alumni-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err"
+sudo docker exec alumni-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
 
 # Start Apache
 sudo docker pull fogbow/apache-shibboleth-server:$APACHE_TAG
