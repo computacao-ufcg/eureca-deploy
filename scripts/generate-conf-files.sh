@@ -131,13 +131,9 @@ echo $ADMIN_USER_NAME","$AS_ADMIN_PASSWORD > $AS_DIR_PATH/$DB_FILE_NAME
 echo $AS_USER_NAME","$AS_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 echo $DEMO_USER_NAME","$DEMO_USER_PASSWORD >> $AS_DIR_PATH/$DB_FILE_NAME
 
-## Creating empty files required
-touch $AS_DIR_PATH/employers.db
-touch $AS_DIR_PATH/employers.consolidated.db
-touch $AS_DIR_PATH/matches.db
-
 # ALUMNI conf-file generation
 ## Setting ALUMNI variables
+PROTOCOL="http://"
 ALUMNI_DIR_PATH="./tmp/conf-files/alumni"
 ALUMNI_CONF_FILE_NAME="alumni.conf"
 ALUMNI_CONTAINER_CONF_FILE_DIR_PATH="/root/alumni-backend/src/main/resources/private"
@@ -171,6 +167,11 @@ echo "alumni_privatekey=id_rsa" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 
 ## Copying configuration files
 cp -f $CONF_FILES_DIR_PATH/"alumni/school.input"  $ALUMNI_DIR_PATH
+
+## Creating empty files required
+touch $ALUMNI_DIR_PATH/employers.db
+touch $ALUMNI_DIR_PATH/employers.consolidated.db
+touch $ALUMNI_DIR_PATH/matches.db
 
 # Eureca conf-file generation
 BACKEND_DIR_PATH="./tmp/conf-files/backend"
