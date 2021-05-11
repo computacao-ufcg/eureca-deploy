@@ -115,8 +115,8 @@ openssl pkcs8 -topk8 -in $AS_RSA_KEY_PATH -out $AS_PRIVATE_KEY_PATH -nocrypt
 openssl rsa -in $AS_PRIVATE_KEY_PATH -outform PEM -pubout -out $AS_PUBLIC_KEY_PATH
 chmod 600 $AS_PRIVATE_KEY_PATH
 rm $AS_RSA_KEY_PATH
-echo "public_key_file_path="$AS_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa.pub" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
-echo "private_key_file_path="$AS_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
+echo "public_key_file=id_rsa.pub" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
+echo "private_key_file=id_rsa" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
 
 ## Creating users DB
 DB_FILE_NAME="users.db"
@@ -166,8 +166,8 @@ openssl pkcs8 -topk8 -in $ALUMNI_RSA_KEY_PATH -out $ALUMNI_PRIVATE_KEY_PATH -noc
 openssl rsa -in $ALUMNI_PRIVATE_KEY_PATH -outform PEM -pubout -out $ALUMNI_PUBLIC_KEY_PATH
 chmod 600 $ALUMNI_PRIVATE_KEY_PATH
 rm $ALUMNI_RSA_KEY_PATH
-echo "alumni_publickey="$ALUMNI_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa.pub" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
-echo "alumni_privatekey="$ALUMNI_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
+echo "alumni_publickey=id_rsa.pub" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
+echo "alumni_privatekey=id_rsa" >> $ALUMNI_DIR_PATH/$ALUMNI_CONF_FILE_NAME
 
 ## Copying configuration files
 cp -f $CONF_FILES_DIR_PATH/"alumni/school.input"  $ALUMNI_DIR_PATH
@@ -196,8 +196,8 @@ openssl pkcs8 -topk8 -in $BACKEND_RSA_KEY_PATH -out $BACKEND_PRIVATE_KEY_PATH -n
 openssl rsa -in $BACKEND_PRIVATE_KEY_PATH -outform PEM -pubout -out $BACKEND_PUBLIC_KEY_PATH
 chmod 600 $BACKEND_PRIVATE_KEY_PATH
 rm $BACKEND_RSA_KEY_PATH
-echo "eureca_publickey="$BACKEND_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa.pub" >> $BACKEND_DIR_PATH/$BACKEND_CONF_FILE_NAME
-echo "eureca_privatekey="$BACKEND_CONTAINER_CONF_FILE_DIR_PATH/"id_rsa" >> $BACKEND_DIR_PATH/$BACKEND_CONF_FILE_NAME
+echo "eureca_publickey=id_rsa.pub" >> $BACKEND_DIR_PATH/$BACKEND_CONF_FILE_NAME
+echo "eureca_privatekey=id_rsa" >> $BACKEND_DIR_PATH/$BACKEND_CONF_FILE_NAME
 
 ## Copying configuration files
 cp -f $CONF_FILES_DIR_PATH/"backend/maps.conf" $BACKEND_DIR_PATH
