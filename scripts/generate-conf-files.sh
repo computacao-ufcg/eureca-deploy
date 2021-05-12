@@ -110,7 +110,7 @@ echo "provider_id="$HOST_FQDN >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
 
 ## Creating and adding key pair
 echo "" >> $AS_DIR_PATH/$AS_CONF_FILE_NAME
-openssl genrsa -out $AS_RSA_KEY_PATH 1024
+openssl genrsa -out $AS_RSA_KEY_PATH 2048
 openssl pkcs8 -topk8 -in $AS_RSA_KEY_PATH -out $AS_PRIVATE_KEY_PATH -nocrypt
 openssl rsa -in $AS_PRIVATE_KEY_PATH -outform PEM -pubout -out $AS_PUBLIC_KEY_PATH
 chmod 600 $AS_PRIVATE_KEY_PATH
