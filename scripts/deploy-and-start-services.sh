@@ -80,8 +80,6 @@ sudo docker run -itd --name eureca-as \
     -v $WORK_DIR/conf-files/as:/root/eureca-as/src/main/resources/private \
     eureca/eureca-as:$AS_TAG
 
-sudo docker exec eureca-as /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
-
 # Start Eureca Backend
 sudo docker pull eureca/eureca-backend:$BACKEND_TAG
 sudo docker run -itd --name eureca-backend \
@@ -89,16 +87,12 @@ sudo docker run -itd --name eureca-backend \
     -v $WORK_DIR/conf-files/backend:/root/eureca-backend/src/main/resources/private \
     eureca/eureca-backend:$BACKEND_TAG
 
-sudo docker exec eureca-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
-
 # Start Alumni Backend
 sudo docker pull eureca/alumni-backend:$ALUMNI_TAG
 sudo docker run -itd --name alumni-backend \
     -p $ALUMNI_PORT:8082 \
     -v $WORK_DIR/conf-files/alumni:/root/alumni-backend/src/main/resources/private \
     eureca/alumni-backend:$ALUMNI_TAG
-
-sudo docker exec alumni-backend /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
 
 # Start Apache
 sudo docker pull fogbow/apache-shibboleth-server:$APACHE_TAG
