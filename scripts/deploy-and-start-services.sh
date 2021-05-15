@@ -70,6 +70,7 @@ sudo docker pull eureca/alumni-site:$ALUMNI_SITE_TAG
 sudo docker run -itd --name alumni-site \
     -p $ALUMNI_SITE_PORT:3001 \
     -v $WORK_DIR/conf-files/alumni-site/api.js:/app/src/services/api.js \
+    -v $WORK_DIR/conf-files/alumni-site/login.js:/app/src/services/login.js \
     eureca/alumni-site:$ALUMNI_SITE_TAG
 
 # Start Eureca AS
