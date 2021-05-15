@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Starting points
-const START_POINT = "service_host_ip";
+const START_POINT = "http://service_host_ip";
 const EURECA_AS = `${START_POINT}:8080/`;
 const EURECA_BACKEND = `${START_POINT}:8081/`;
 const ALUMNI_AS = `${START_POINT}:8082/`;
