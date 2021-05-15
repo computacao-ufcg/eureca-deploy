@@ -214,10 +214,16 @@ sed -i "s|$SERVICE_HOST_IP_PATTERN|$SERVICE_HOST_IP|g" $FRONTEND_DIR_PATH/"api.j
 
 # ALUMNI-SITE conf-file generation
 ALUMNI_SITE_DIR_PATH="./tmp/conf-files/alumni-site"
+ALUMNI_USER_NAME_PATTERN=alumni_site_user
+ALUMNI_USER_PASSWORD_PATTERN=alumni_site_password
 mkdir -p $ALUMNI_SITE_DIR_PATH
 ## Copying configuration files
 cp -f $CONF_FILES_DIR_PATH/"alumni-site/api.js" $ALUMNI_SITE_DIR_PATH
 sed -i "s|$SERVICE_HOST_IP_PATTERN|$SERVICE_HOST_IP|g" $ALUMNI_SITE_DIR_PATH/"api.js"
+cp -f $CONF_FILES_DIR_PATH/"alumni-site/login.js" $ALUMNI_SITE_DIR_PATH
+chmod 600 $ALUMNI_SITE_DIR_PATH/"login.js"
+sed -i "s|$ALUMNI_USER_NAME_PATTERN|$AS_USER_NAME|g" $ALUMNI_SITE_DIR_PATH/"login.js"
+sed -i "s|$ALUMNI_USER_PASSWORD_PATTERN|$AS_USER_PASSWORD|g" $ALUMNI_SITE_DIR_PATH/"login.js"
 
 # Apache conf-file generation
 ## Setting apache variables
