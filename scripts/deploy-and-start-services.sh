@@ -62,15 +62,15 @@ echo "Creating containers"
 sudo docker pull eureca/eureca-frontend:$FRONTEND_TAG
 sudo docker run -itd --name eureca-frontend \
     -p $FRONTEND_PORT:3000 \
-    -v $WORK_DIR/conf-files/frontend/api.js:/app/src/services/api.js \
+    -v $WORK_DIR/conf-files/frontend/api.js:/root/eureca-frontend/services/api.js \
     eureca/eureca-frontend:$FRONTEND_TAG
 
 # Start Alumni Site
 sudo docker pull eureca/alumni-site:$ALUMNI_SITE_TAG
 sudo docker run -itd --name alumni-site \
     -p $ALUMNI_SITE_PORT:3001 \
-    -v $WORK_DIR/conf-files/alumni-site/api.js:/app/src/services/api.js \
-    -v $WORK_DIR/conf-files/alumni-site/login.js:/app/src/services/login.js \
+    -v $WORK_DIR/conf-files/alumni-site/api.js:/root/alumni-site/services/api.js \
+    -v $WORK_DIR/conf-files/alumni-site/login.js:/root/alumni-site/services/login.js \
     eureca/alumni-site:$ALUMNI_SITE_TAG
 
 # Start Eureca AS
