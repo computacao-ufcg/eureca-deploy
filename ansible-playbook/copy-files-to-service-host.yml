@@ -25,3 +25,33 @@
         src: "../scripts/tmp/deploy-and-start-services.sh"
         dest: "./deploy-and-start-services.sh"
         mode: 0644
+    - name: Copying start-eureca-frontend.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-eureca-frontend.sh"
+        dest: "./start-eureca-frontend.sh"
+        mode: 0644
+    - name: Copying start-eureca-backend.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-eureca-backend.sh"
+        dest: "./start-eureca-backend.sh"
+        mode: 0644
+    - name: Copying start-eureca-as.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-eureca-as.sh"
+        dest: "./start-eureca-as.sh"
+        mode: 0644
+    - name: Copying start-alumni-site.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-alumni-site.sh"
+        dest: "./start-alumni-site.sh"
+        mode: 0644
+    - name: Copying start-apache.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-apache.sh"
+        dest: "./start-apache.sh"
+        mode: 0644
+    - name: Copying start-alumni-backend.sh to service_host
+      copy:
+        src: "../scripts/tmp/start-alumni-backend.sh"
+        dest: "./start-alumni-backend.sh"
+        mode: 0644
