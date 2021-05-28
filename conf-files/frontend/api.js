@@ -2,9 +2,9 @@ import axios from 'axios';
 
 // Starting points
 const START_POINT = "http://service_host_ip";
-const EURECA_AS = `${START_POINT}:8080/`;
-const EURECA_BACKEND = `${START_POINT}:8081/`;
-const ALUMNI_AS = `${START_POINT}:8082/`;
+const EURECA_AS = `${START_POINT}:8080/as`;
+const EURECA_BACKEND = `${START_POINT}:8081/eureca`;
+const ALUMNI_AS = `${START_POINT}:8082/alumni`;
 
 // Default for tests
 const api = axios.create({
