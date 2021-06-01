@@ -10,7 +10,13 @@
         state: absent
       with_items:
         - "./conf-files"
-        - "./scripts"
+        - "./deploy-and-start-services.sh"
+        - "./start-eureca-frontend.sh"
+        - "./start-eureca-backend.sh"
+        - "./start-eureca-as.sh"
+        - "./start-alumni-site.sh"
+        - "./start-apache.sh"
+        - "./start-alumni-backend.sh"
     - name: Copying conf-files to service_host
       copy:
         src: "{{ source_conf }}"
@@ -24,35 +30,35 @@
     - name: Copying deploy-and-start-services.sh to service_host
       copy:
         src: "{{ source_script }}/deploy-and-start-services.sh"
-        dest: "{{ target_conf }}/scripts/deploy-and-start-services.sh"
+        dest: "./deploy-and-start-services.sh"
         mode: 0644
     - name: Copying start-eureca-frontend.sh to service_host
       copy:
         src: "{{ source_script }}/start-eureca-frontend.sh"
-        dest: "{{ target_conf }}/scripts/start-eureca-frontend.sh"
+        dest: "./start-eureca-frontend.sh"
         mode: 0644
     - name: Copying start-eureca-backend.sh to service_host
       copy:
         src: "{{ source_script }}/start-eureca-backend.sh"
-        dest: "{{ target_conf }}/scripts/start-eureca-backend.sh"
+        dest: "./start-eureca-backend.sh"
         mode: 0644
     - name: Copying start-eureca-as.sh to service_host
       copy:
         src: "{{ source_script }}/start-eureca-as.sh"
-        dest: "{{ target_conf }}/scripts/start-eureca-as.sh"
+        dest: "./start-eureca-as.sh"
         mode: 0644
     - name: Copying start-alumni-site.sh to service_host
       copy:
         src: "{{ source_script }}/start-alumni-site.sh"
-        dest: "{{ target_conf }}/scripts/start-alumni-site.sh"
+        dest: "./start-alumni-site.sh"
         mode: 0644
     - name: Copying start-apache.sh to service_host
       copy:
         src: "{{ source_script }}/start-apache.sh"
-        dest: "{{ target_conf }}/scripts/start-apache.sh"
+        dest: "./start-apache.sh"
         mode: 0644
     - name: Copying start-alumni-backend.sh to service_host
       copy:
         src: "{{ source_script }}/start-alumni-backend.sh"
-        dest: "{{ target_conf }}/scripts/start-alumni-backend.sh"
+        dest: "./start-alumni-backend.sh"
         mode: 0644
