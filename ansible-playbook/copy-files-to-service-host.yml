@@ -1,6 +1,7 @@
 - hosts: service_host
   vars:
     source_conf: ../scripts/tmp/conf-files
+    source_script: ../scripts
     target_conf: ./
   tasks:
     - name: Removing files from earlier installation in service_host
@@ -9,7 +10,7 @@
         state: absent
       with_items:
         - "./conf-files"
-        - "./deploy-and-start-services.sh"
+        - "./scripts"
     - name: Copying conf-files to service_host
       copy:
         src: "{{ source_conf }}"
@@ -22,36 +23,36 @@
         mode: 0644
     - name: Copying deploy-and-start-services.sh to service_host
       copy:
-        src: "../scripts/tmp/deploy-and-start-services.sh"
-        dest: "./deploy-and-start-services.sh"
+        src: "{{ source_script }}/deploy-and-start-services.sh"
+        dest: "{{ target_conf }}/scripts/deploy-and-start-services.sh"
         mode: 0644
     - name: Copying start-eureca-frontend.sh to service_host
       copy:
-        src: "../scripts/tmp/start-eureca-frontend.sh"
-        dest: "./start-eureca-frontend.sh"
+        src: "{{ source_script }}/start-eureca-frontend.sh"
+        dest: "{{ target_conf }}/scripts/start-eureca-frontend.sh"
         mode: 0644
     - name: Copying start-eureca-backend.sh to service_host
       copy:
-        src: "../scripts/tmp/start-eureca-backend.sh"
-        dest: "./start-eureca-backend.sh"
+        src: "{{ source_script }}/start-eureca-backend.sh"
+        dest: "{{ target_conf }}/scripts/start-eureca-backend.sh"
         mode: 0644
     - name: Copying start-eureca-as.sh to service_host
       copy:
-        src: "../scripts/tmp/start-eureca-as.sh"
-        dest: "./start-eureca-as.sh"
+        src: "{{ source_script }}/start-eureca-as.sh"
+        dest: "{{ target_conf }}/scripts/start-eureca-as.sh"
         mode: 0644
     - name: Copying start-alumni-site.sh to service_host
       copy:
-        src: "../scripts/tmp/start-alumni-site.sh"
-        dest: "./start-alumni-site.sh"
+        src: "{{ source_script }}/start-alumni-site.sh"
+        dest: "{{ target_conf }}/scripts/start-alumni-site.sh"
         mode: 0644
     - name: Copying start-apache.sh to service_host
       copy:
-        src: "../scripts/tmp/start-apache.sh"
-        dest: "./start-apache.sh"
+        src: "{{ source_script }}/start-apache.sh"
+        dest: "{{ target_conf }}/scripts/start-apache.sh"
         mode: 0644
     - name: Copying start-alumni-backend.sh to service_host
       copy:
-        src: "../scripts/tmp/start-alumni-backend.sh"
-        dest: "./start-alumni-backend.sh"
+        src: "{{ source_script }}/start-alumni-backend.sh"
+        dest: "{{ target_conf }}/scripts/start-alumni-backend.sh"
         mode: 0644

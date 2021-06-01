@@ -5,9 +5,15 @@ sudo docker stop eureca-frontend alumni-site eureca-as eureca-backend alumni-bac
 sudo docker rm eureca-frontend alumni-site eureca-as eureca-backend alumni-backend apache
 
 echo "Starting containers"
-bash start-eureca-frontend.sh
-bash start-alumni-site.sh
-bash start-eureca-as.sh
-bash start-eureca-backend.sh
-bash start-alumni-backend.sh
-bash start-apache.sh
+
+./scripts/start-eureca-as.sh
+
+./scripts/start-eureca-backend.sh
+
+./scripts/start-apache.sh
+
+./scripts/start-alumni-site.sh
+
+./scripts/start-eureca-frontend.sh
+
+./scripts/start-alumni-backend.sh
