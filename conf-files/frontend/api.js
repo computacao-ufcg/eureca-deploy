@@ -28,7 +28,7 @@ const api_EAS = axios.create({
 });
 
 // For Alumnus Service API
-const api_AS = axios.create({
+const api_AB = axios.create({
   baseURL: ALUMNI_AS,
   headers: {
     'Content-type': 'application/json',
@@ -36,4 +36,4 @@ const api_AS = axios.create({
 });
 
 export default api;
-export { api_EB, api_EAS, api_AS };
+export { api_EB, api_EAS, api_AB };
