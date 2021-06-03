@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // Starting points
-const START_POINT = 'http://service_host_ip';
-const EURECA_AS = `${START_POINT}:8080/as`;
-const ALUMNI_AS = `${START_POINT}:8082/alumni`;
+const START_POINT = 'https://service_host_FQDN/';
+const EURECA_AS = `${START_POINT}/as/`;
+const ALUMNI_AS = `${START_POINT}/alumni/`;
 
 // for Eureca Authentication Service
 const api_EAS = axios.create({
